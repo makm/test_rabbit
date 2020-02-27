@@ -30,5 +30,5 @@ RUN docker-php-ext-install sockets
 #set docker-user for 1000 uid
 RUN useradd --shell /bin/bash -u 1000 -o -c "" -m docker-user
 
-WORKDIR "/var/www"
+WORKDIR "/var/www/test-src"
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

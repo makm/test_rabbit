@@ -20,3 +20,5 @@ for ($i = 0; $i < 10000; $i++) {
     $task = new $class(['some-value' => random_int(1, 999999)]);
     $application->getTaskProducer()->pushTask($task);
 }
+
+die('Done');
