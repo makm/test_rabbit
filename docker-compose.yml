@@ -1,0 +1,19 @@
+# Generated on phpdocker.io
+version: "3.6"
+
+services:
+    php-fpm:
+      build: docker/php-fpm
+      container_name: test_php-fpm
+      working_dir: /var/www
+      volumes:
+        - ./test-src:/var/www/test-src
+        - ./docker/supervisor/conf.d/:/etc/supervisor/conf.d/
+        - ./docker/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+
+    supervisor:
+      image: rabbitmq:3-management
+      container_name: test_rabbitmq
+      ports:
+        - "15672:15672"
+        - "5672:5672"
