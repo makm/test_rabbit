@@ -9,7 +9,7 @@ use WorkerProcesses\Process\Task\TaskOrderOsago;
  * Class ProcessOrderCredit
  * @package WorkerProcesses\Process\Processor
  */
-class ProcessOrderOsago implements ProcessInterface
+class ProcessOrderOsago extends ProcessAbstract
 {
     /**
      * @param TaskInterface $task
@@ -17,9 +17,14 @@ class ProcessOrderOsago implements ProcessInterface
      */
     public function process(TaskInterface $task): bool
     {
-//        sleep(2);
-
-        var_export($task->getParameters());
+        sleep(TEST_PROCESS_SLEEP_TIME);
+        $this->logger->info(
+            \sprintf(
+                '%s Finish work with params %s',
+                __CLASS__,
+                \var_export($task->getParameters(), true)
+            )
+        );
 
         return true;
     }

@@ -15,7 +15,7 @@ $taskClasses = [
 ];
 
 
-for ($i = 0; $i < 100000; $i++) {
+for ($i = 0; $i < 10000; $i++) {
     $class = $taskClasses[array_rand($taskClasses)];
     $task = new $class(['some-value' => random_int(1, 999999)]);
     $application->getTaskProducer()->pushTask($task);

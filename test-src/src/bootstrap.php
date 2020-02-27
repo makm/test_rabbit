@@ -1,5 +1,7 @@
 <?php
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use WorkerProcesses\Process\Processor\ProcessOrderCredit;
 use WorkerProcesses\Process\Processor\ProcessOrderKasco;
@@ -17,10 +19,13 @@ $application = new WorkerApplication(
     $exchange
 );
 
+$logger = new Logger('test');
+$logger->pushHandler(new StreamHandler(__DIR__.'/processes.log'), false);
+
 $application
-    ->addProcess(new ProcessOrderCredit())
-    ->addProcess(new ProcessOrderKasco())
-    ->addProcess(new ProcessOrderOsago())
-    ->addProcess(new ProcessOrderRefinance());
+    ->addProcess(new ProcessOrderCredit($logger))
+    ->addProcess(new ProcessOrderKasco($logger))
+    ->addProcess(new ProcessOrderOsago($logger))
+    ->addProcess(new ProcessOrderRefinance($logger));
 
 return $application;
