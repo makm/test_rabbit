@@ -20,7 +20,7 @@ $application = new WorkerApplication(
 );
 
 $logger = new Logger('test');
-$logger->pushHandler(new StreamHandler(__DIR__.'/processes.log'), false);
+$logger->pushHandler(new StreamHandler(__DIR__.'/processes.log', true, null, true));
 
 $application
     ->addProcess(new ProcessOrderCredit($logger))
